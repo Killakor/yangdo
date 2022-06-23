@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 클래스에 별명짓기 -->
+	<typeAliases>
+		<typeAlias type="member.dto.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="yangdo.bean.YangdoDTO" alias="yangdoDTO"/>
+		<typeAlias type="notice.dto.NoticeDTO" alias="Ndto"/>
+		<typeAlias type="faq.dto.FaqDTO" alias="Fdto"/>
+		<typeAlias type="event.dto.EventDTO" alias="Edto"/>
+		<typeAlias type="qna.dto.QnaDTO" alias="Qdto"/>
+	</typeAliases>
+	
+	<!-- sql mapper 등록 -->
+	<mappers>
+		<mapper resource="/mybatis/member-mapping.xml" />
+		<mapper resource="/mybatis/yangdo-mapping.xml" />
+		<mapper resource="/mybatis/faq-mapping.xml"/>
+		<mapper resource="/mybatis/event-mapping.xml"/>
+		<mapper resource="/mybatis/notice-mapping.xml"/>
+		<mapper resource="/mybatis/qna-mapping.xml"/>
+	</mappers>
+</configuration>

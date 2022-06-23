@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'test_name';
+	font-style: normal;
+	font-weight: 800;
+	src: url('../resources/BMJUA_ttf.ttf') format('truetype');
+}
+
+input[type=text] {
+	float: left;
+}
+
+#yangdoContent {
+	width: 550px;
+	height: 550px;
+	margin: 0 auto;
+}
+
+table {font-size: 14px;}
+
+td{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+h3{
+	padding-bottom: 10px;
+}
+input{
+	width:400px; height:30px;
+	margin-bottom: 8px;
+	padding: 5px 10px;
+	border-radius: 6px;
+	border: 1px solid rgba(0, 0, 0, 0.26);
+	font-size: 17px;
+}
+input[type=date]{
+	width:187px;
+}
+.span_date {
+	display: inline-block;
+	width: 215px; height: 30px;
+}
+select{
+	width:209px;
+	height:42px;
+	margin-bottom: 8px;
+	padding: 5px 10px;
+	border-radius: 6px;
+	border: 1px solid rgba(0, 0, 0, 0.26);
+	font-size: 17px;
+}
+input::placeholder{
+	font-size : 14px;
+	color: #c0c0c0;
+	font-weight: lighter;
+	font-family: 'Nanum Gothic';	
+}
+
+img#category1{
+	width:20px;
+	height:20px;
+}
+
+img#category2{
+	width:20px;
+	height:20px;
+}
+
+img#category3{
+	width:20px;
+	height:20px;
+}
+.myButton {
+	background:#f7323f;
+	width:422px; height:70px;
+	font-size:25px;
+	color:white;
+	text-align:center;
+	border: 0;
+	cursor: pointer;
+}

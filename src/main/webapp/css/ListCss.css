@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+table {font-size: 20px;}
+@font-face {
+	font-family: 'test_name';
+	font-style: normal;
+	font-weight: 800;
+	src: url('../resources/BMJUA_ttf.ttf') format('truetype');
+}
+
+div {
+	font-family: 'test_name';
+}
+
+.status {
+	color: #f7323f;
+	font-weight: bold;
+}
+
+.due_date {
+	color: black;
+	text-decoration: none;
+	border-bottom: 1px solid black;
+	font-size: 25px;
+	padding-top: 10px;
+}
+
+.due_date>span {
+	color: #f7323f;
+	font-size: 20px;
+}
+
+th {
+	width: 200px;
+	text-align: left;
+	color: gray;
+	font-size: 18px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+td{
+	font-size: 18px;
+}
+.detail {
+	text-align: center;
+	background-color: #ebebeb;
+	height: 35px;
+}
+
+img#category1{
+	width:20px;
+	height:20px;
+}
+
+img#category2{
+	width:20px;
+	height:20px;
+}
+
+img#category3{
+	width:20px;
+	height:20px;
+}

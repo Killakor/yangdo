@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.YangdoMapper">
+	<insert id="yangdoWrite" parameterType="yangdoDTO">
+		insert into yangdo_list values (seq.nextval, #{id}, #{res_start_date}, #{res_end_date}, #{res_region}, #{yangdo_kind}, #{res_spot}, #{res_seat}, #{res_price}, #{res_total}, #{yangdo_due_date}, #{yangdo_price}, #{yangdo_fee}, #{yangdo_total_price}, '대기중', #{yangdo_reason}, #{yangdo_res_count}, #{yangdo_people})
+	</insert>
+	
+	<select id="yangdoList" parameterType="java.util.Map" resultType="yangdoDTO">
+		<![CDATA[select seq, id, yangdo_due_date, res_start_date, res_end_date, res_region, yangdo_kind, res_spot, res_seat, res_price, yangdo_price, yangdo_status from (select rownum rn, tt.* from (select * from yangdo_list where yangdo_kind like '%'||#{yangdo_kind}||'%' and yangdo_status='대기중' order by yangdo_due_date asc) tt) where rn>=#{startNum} and rn<=#{endNum} and yangdo_kind like '%'||#{yangdo_kind}||'%' and yangdo_status='대기중']]>
+	</select>
+	
+	<select id="getTotalA" parameterType="String" resultType="int">
+		select count(*) as cnt from yangdo_list where yangdo_kind like '%'||#{yangdo_kind}||'%' and yangdo_status like '대기중'
+	</select>
+		
+	<select id="yangdoView" parameterType="int" resultType="yangdoDTO">
+		select * from yangdo_list where seq=#{seq}
+	</select>
+	
+	<select id="yangdoWriteView" parameterType="String" resultType="yangdoDTO">
+		select * from yangdo_list where id=#{id} and seq=#{seq}
+	</select>
+	
+	<update id="yangdoModify" parameterType="yangdoDTO">
+		update yangdo_list set res_start_date=#{res_start_date}, res_end_date=#{res_end_date}, res_region=#{res_region}, yangdo_kind=#{yangdo_kind}, res_spot=#{res_spot}, res_seat=#{res_seat}, res_price=#{res_price}, res_total=#{res_total}, yangdo_due_date=#{yangdo_due_date}, yangdo_price=#{yangdo_price}, yangdo_fee=#{yangdo_fee}, yangdo_total_price=#{yangdo_total_price}, yangdo_reason=#{yangdo_reason}, yangdo_res_count=#{yangdo_res_count}, yangdo_people=#{yangdo_people} where seq=#{seq}
+	</update>
+	
+	<update id="yangdoPayGive" parameterType="int">
+		update yangdo_list set yangdo_status='양도완료' where seq=#{seq}
+	</update>
+	
+	<insert id="yangdoPayTake" parameterType="yangdoDTO">
+		<![CDATA[insert into yangdo_list values (seq.nextval, #{id}, TO_DATE(#{res_start_date},'YYYY-MM-DD HH24:MI:SS'), TO_DATE(#{res_end_date}, 'YYYY-MM-DD HH24:MI:SS'),#{res_region}, #{yangdo_kind}, #{res_spot}, #{res_seat}, #{res_price}, #{res_total}, TO_DATE(#{yangdo_due_date},'YYYY-MM-DD'), #{yangdo_price}, #{yangdo_fee}, #{yangdo_total_price},'결제완료', #{yangdo_reason}, #{yangdo_res_count}, #{yangdo_people})]]>
+	</insert>
+	
+	<delete id="yangdoDelete" parameterType="int">
+		delete yangdo_list where seq=#{seq}
+	</delete>
+	
+	<delete id="ListRearrange">
+		delete from yangdo_list where TO_CHAR(sysdate,'YYYY/MM/DD') > TO_Date(yangdo_due_date,'YYYY-MM-DD') 
+	</delete>
+	
+	<select id="getMyTotalA" parameterType="String" resultType="int">
+		select count(*) as cnt from yangdo_list where id=#{id}
+	</select>
+	
+	<select id="myYangdoList" parameterType="java.util.Map" resultType="yangdoDTO">
+		<![CDATA[select seq, id, yangdo_due_date, res_start_date, res_end_date, res_region, yangdo_kind, res_spot, res_seat, yangdo_price, yangdo_status from (select rownum rn, tt.* from (select * from yangdo_list where id=#{id} order by seq desc) tt) where rn>=#{startNum} and rn<=#{endNum}]]>
+	</select>
+</mapper>
+
+
+
+

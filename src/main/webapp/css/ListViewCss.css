@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'test_name';
+	font-style: normal;
+	font-weight: 800;
+	src: url('../resources/BMJUA_ttf.ttf') format('truetype');
+}
+
+*{
+	font-family: 'test_name';
+}
+
+table.table_top td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+table.table_bottom td {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+table.table_top .content {
+	color: gray;
+	text-align: left;
+}
+
+table.table_bottom .content {
+	color: gray;
+	text-align: left;
+}
+
+table.scd_table_bottom .content {
+	color: gray;
+	text-align: left;
+}
+
+table.scd_table_bottom td {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+

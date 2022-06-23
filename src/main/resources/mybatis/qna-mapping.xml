@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.QnaMapper">
+	<select id="qnaListAndView" parameterType="java.util.Map" resultType="Qdto">
+		<![CDATA[
+		select qna_num, name, id, grade, qna_type, 
+		qna_category, qna_result, qna_public, qna_subject, 
+		qna_content, qna_reply, qna_public,        
+		to_char(qna_logtime, 'YYYY.MM.DD') as qna_logtime,
+		to_char(qna_redate, 'YYYY.MM.DD') as qna_redate from 
+		(select rownum rn, tt.* from
+		(select * from qna order by qna_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<select id="getTotalA" resultType="int">
+		select count(*) as cnt from qna
+	</select>
+	
+	<insert id="qnaWrite" parameterType="Qdto">
+		insert into qna values
+		(seq_qna.nextval, #{name}, #{id}, #{grade}, #{qna_type}, #{qna_category}, 
+		0, #{qna_subject}, #{qna_content}, sysdate, null, null, #{qna_public})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete qna where qna_num = #{qna_num}
+	</delete>
+	
+	<update id="qnaReply" parameterType="Qdto">
+		update qna set
+		qna_result = 1,
+		qna_reply = #{qna_reply}, qna_redate = sysdate
+		where qna_num = #{qna_num}
+	</update>
+	
+	<update id="qnaModify" parameterType="Qdto">
+		update qna set 
+		qna_type = #{qna_type}, qna_category = #{qna_category}, 
+		qna_public = #{qna_public},
+		qna_subject = #{qna_subject}, qna_content = #{qna_content}
+		where qna_num = #{qna_num}
+	</update>
+	
+	<select id="qnaView" parameterType="int" resultType="Qdto">
+		select * from qna where qna_num = #{qna_num}
+	</select>
+	
+	<select id="getMyTotalA" resultType="int">
+		select count(*) as cnt from qna  where id=#{id}
+	</select>
+	
+	<select id="myQnaListAndView" parameterType="java.util.Map" resultType="Qdto">
+		<![CDATA[
+		select qna_num, name, id, grade, qna_type, 
+		qna_category, qna_result, qna_public, qna_subject, 
+		qna_content, qna_reply, qna_public,        
+		to_char(qna_logtime, 'YYYY.MM.DD') as qna_logtime,
+		to_char(qna_redate, 'YYYY.MM.DD') as qna_redate from 
+		(select rownum rn, tt.* from
+		(select * from qna where id=#{id} order by qna_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+</mapper>

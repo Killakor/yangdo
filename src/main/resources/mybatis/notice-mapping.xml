@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.NoticeMapper">
+
+	<select id="noticeListAndView" parameterType="java.util.Map" resultType="Ndto">
+		<![CDATA[
+		select notice_num, name, id, grade, notice_subject, notice_content, 
+		to_char(notice_logtime, 'YYYY.MM.DD') as notice_logtime from 
+		(select rownum rn, tt.* from
+		(select * from notice order by notice_num desc) tt) 
+		where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+	
+	<select id="getTotalA" resultType="int">
+		select count(*) as cnt from notice
+	</select>
+	
+	<insert id="noticeWrite" parameterType="Ndto">
+		insert into notice values
+		(seq_notice.nextval, #{name}, #{id}, #{grade}, #{notice_subject}, 
+		#{notice_content}, sysdate)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete notice where notice_num = #{notice_num}
+	</delete>
+	
+	<update id="noticeModify" parameterType="Ndto">
+		update notice set notice_subject = #{notice_subject}, 
+		notice_content = #{notice_content}
+		where notice_num = #{notice_num}
+	</update>
+	
+	<select id="noticeView" parameterType="int" resultType="Ndto">
+		select * from notice where notice_num = #{notice_num}
+	</select>
+</mapper>

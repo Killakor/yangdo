@@ -1,0 +1,25 @@
+$(document).ready(function(){
+	$("#category1-1").hide();
+	$("#category1-2").hide();
+	$("#category1-3").hide();
+	$("#category2-1").hide();
+	$("#category2-2").hide();
+	$("#category2-3").hide();
+	$("#category3-1").hide();
+	$("#category3-2").hide();
+	
+	$("#category1").click(function(){
+		$("#category1-1").slideToggle();
+		$("#category1-2").slideToggle();
+		$("#category1-3").slideToggle();
+	});
+	$("#category2").click(function(){
+		$("#category2-1").slideToggle();
+		$("#category2-2").slideToggle();
+		$("#category2-3").slideToggle();
+	});
+	$("#category3").click(function(){
+		$("#category3-1").slideToggle();
+		$("#category3-2").slideToggle();          
+	});
+});
